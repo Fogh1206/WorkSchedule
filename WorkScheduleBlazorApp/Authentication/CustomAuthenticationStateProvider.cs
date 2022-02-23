@@ -78,9 +78,14 @@ namespace WorkScheduleBlazorApp.Authentication
 
         private ClaimsIdentity SetUpClaimsForUser(User user)
         {
-            List<Claim> claims = new();
-            claims.Add(new Claim(ClaimTypes.Name, user.Username));
-            claims.Add(new Claim("Company", user.Company.Name));
+            List<Claim> claims = new()
+            {
+                new Claim(ClaimTypes.Upn, user.Username),
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.FirstName),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.GroupSid, user.Company.Id.ToString())
+            };
 
             ClaimsIdentity identity = new(claims, "apiauth_type");
             return identity;

@@ -14,18 +14,20 @@ namespace WorkScheduleAPI.Controllers
     public class ShiftController : ControllerBase
     {
         private IShift _shift;
+        private IUser _user;
 
-        public ShiftController(IShift shift)
+        public ShiftController(IShift shift, IUser user)
         {
             _shift = shift;
+            _user = user;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<Shift>>> GetShifts()
+        public async Task<ActionResult<IEnumerable<Shift>>> GetShifts()
         {
             try
             {
-                IList<Shift> shifts = await _shift.GetAsync();
+                IEnumerable<Shift> shifts = await _shift.GetAsync();
                 return Ok(shifts);
             }
             catch (Exception e)
@@ -35,12 +37,33 @@ namespace WorkScheduleAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Shift>> AddShift([FromBody] Shift shift)
+        public async Task<ActionResult<Shift>> AddShift([FromBody] CreateShiftDTO shiftDTO)
         {
             try
             {
+                Shift shift = new()
+                {
+                    Start = shiftDTO.Start,
+                    End = shiftDTO.End,
+                    User = await _user.GetByIdAsync(shiftDTO.UserId)
+                };
+                
                 await _shift.PostAsync(shift);
-                return Created($"/{shift.Id}", shift);
+                return Ok(shift);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("/Shifts/{id:int}")]
+        public async Task<ActionResult<IEnumerable<GetShiftDTO>>> GetShiftsFromUserId([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(await _shift.GetFromUserIdAsync(id));
             }
             catch (Exception e)
             {

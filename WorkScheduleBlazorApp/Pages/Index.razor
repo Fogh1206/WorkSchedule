@@ -1,107 +1,58 @@
 @page "/"
 @using WorkScheduleBlazorApp.Data
 @using WorkScheduleBlazorApp.Models
+@using System.Security.Claims
+@using WorkScheduleBlazorApp.Authentication
 @inject IUser _userService;
 @inject ICompany _companyService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Index</PageTitle>
 
-<h1>User</h1>
+<h3>ClaimsPrincipal Data</h3>
 
-<EditForm Model="_exampleUserDTO" OnValidSubmit="ValidateUser">
-    <ValidationSummary/>
-    <DataAnnotationsValidator/>
-    
-    Username
-    <br/>
-    <InputText id="username" @bind-Value="_exampleUserDTO.Username"/>
-    <br/>
-    Password
-    <br/>
-    <InputText id="password" @bind-Value="_exampleUserDTO.Password">Password</InputText>
-    <br/>
-    <button type="submit">Submit</button>
-    <br/>
+<p>@_authMessage</p>
 
-</EditForm>
-
-
-@if (_user.FirstName != null)
+@if (_claims.Count() > 0)
 {
-    <p>@_user.FirstName</p>
-}
-else
-{
-    <p>Loading...</p>
+    <ul>
+        @foreach (var claim in _claims)
+        {
+            <li>@claim.Type: @claim.Value</li>
+        }
+    </ul>
 }
 
-<h1>Company</h1>
-
-<EditForm Model="_exampleCompanyDTO" OnValidSubmit="CreateCompany">
-    <ValidationSummary/>
-    <DataAnnotationsValidator/>
-    
-    Name
-    <br/>
-    <InputText id="name" @bind-Value="_exampleCompanyDTO.Name"/>
-    <br/>
-    <button type="submit">Submit</button>
-    <br/>
-    
-</EditForm>
-
-@if (_company.Id != null && _company.Id != 0)
-{
-    <p>@_company.Id.ToString()</p>
-}
-else
-{
-    <p>Loading...</p>
-}
-
+<p>@_surnameMessage</p>
 
 @code
 {
-    CreateUserDTO _exampleUserDTO = new();
-    CreateCompanyDTO _exampleCompanyDTO = new();
+    private string _authMessage;
+    private string _surnameMessage;
+    private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
     
-    User _user = new();
-    Company _company = new();
-
-    private async void CreateCompany()
+    private async Task GetClaimsPrincipalData()
     {
-        Company _exampleCompany = new()
-        {
-            Name = _exampleCompanyDTO.Name
-        };
-        _company = await _companyService.CreateCompany(_exampleCompany);
-        Console.WriteLine(_company.Name);
-        Console.WriteLine(_company.Id.ToString());
-    }
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
 
-    private async void ValidateUser()
-    {
-
-        User _exampleUser = new()
+        if (user.Identity.IsAuthenticated)
         {
-            Id = 0,
-            Username = _exampleUserDTO.Username,
-            Password = _exampleUserDTO.Password,
-            Salary = 0,
-            FirstName = "string",
-            LastName = "string"
-        };
-
-        try
-        {
-            _user = await _userService.ValidateUser(_exampleUser);
+            _authMessage = $"{user.Identity.Name} is authenticated.";
+            _claims = user.Claims;
+            _surnameMessage = 
+                $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
         }
-        catch (Exception e)
+        else
         {
-            _user.FirstName = "ERROR";
-            Console.WriteLine(e.Message);
+            _authMessage = "The user is NOT authenticated.";
         }
-
     }
     
+    protected override async Task OnInitializedAsync()
+    {
+        await GetClaimsPrincipalData();
+        await base.OnInitializedAsync();
+    }
+
 }

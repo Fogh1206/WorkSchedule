@@ -1,11 +1,12 @@
 ﻿@using WorkScheduleBlazorApp.Authentication
 @using WorkScheduleBlazorApp.Models
 @namespace WorkScheduleBlazorApp.Components
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider _authenticationStateProvider
+@inject NavigationManager _navigationManager
 
 <AuthorizeView>
     <NotAuthorized>
+        
         <div class="form-group">
             <label>User name:</label>
             <input type="text" placeholder="user name" @bind-value="username">
@@ -18,7 +19,7 @@
             @errorMessage
         </div>
         <button href="" onclick="@PerformLogin">Log in</button>
-        
+
     </NotAuthorized>
     <Authorized>
         <button href="" onclick="@PerformLogout">Log out</button>
@@ -40,10 +41,10 @@
                 Username = username,
                 Password = password
             };
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(user);
+            await ((CustomAuthenticationStateProvider) _authenticationStateProvider).ValidateLogin(user);
             username = "";
             password = "";
-            NavigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("/",forceLoad:true);
         }
         catch (Exception e)
         {
@@ -58,8 +59,8 @@
         password = "";
         try
         {
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
-            NavigationManager.NavigateTo("/");
+            await ((CustomAuthenticationStateProvider) _authenticationStateProvider).Logout();
+            _navigationManager.NavigateTo("/", forceLoad:true);
         }
         catch (Exception e)
         {

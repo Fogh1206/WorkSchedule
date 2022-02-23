@@ -65,6 +65,7 @@ namespace WorkScheduleAPI.Controllers
                     Password = userDTO.Password,
                     FirstName = userDTO.FirstName,
                     LastName = userDTO.LastName,
+                    Role = userDTO.Role,
                     Company = await _company.GetByIdAsync(userDTO.CompanyId)
                 };
                 await _user.PostAsync(user);

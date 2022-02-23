@@ -11,5 +11,6 @@ namespace WorkScheduleBlazorApp.Models
         public DateTime Start { get; set; }
         [Required]
         public DateTime End { get; set; }
+        public virtual User? User { get; set; }
     }
 }

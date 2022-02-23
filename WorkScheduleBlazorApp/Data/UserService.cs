@@ -31,7 +31,6 @@ namespace WorkScheduleBlazorApp.Data
             HttpResponseMessage response = await _client.PostAsync($"{Uri}/User/Login", content);
             User result = await response.Content.ReadFromJsonAsync<User>() ?? throw new Exception("User not found");
             return result;
-
         }
     }
 }

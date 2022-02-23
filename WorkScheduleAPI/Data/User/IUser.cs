@@ -9,5 +9,6 @@ namespace WorkScheduleAPI.Data
         Task<User> ValidateUser(User user);
         Task PostAsync(User user);
         Task<IList<User>> GetAsync();
+        Task<User> GetByIdAsync(int id);
     }
 }

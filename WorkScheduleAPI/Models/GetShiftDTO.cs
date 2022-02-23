@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace WorkScheduleBlazorApp.Models
+namespace WorkScheduleAPI.Models
 {
-    public class CreateShiftDTO
+    public class GetShiftDTO
     {
+        public int Id { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public int UserId { get; set; }
     }
 }

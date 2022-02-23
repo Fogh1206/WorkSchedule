@@ -6,7 +6,8 @@ namespace WorkScheduleAPI.Data
 {
     public interface IShift
     {
-        Task<IList<Shift>> GetAsync();
+        Task<IEnumerable<Shift>> GetAsync();
+        Task<IEnumerable<GetShiftDTO>> GetFromUserIdAsync(int userId);
         Task PostAsync(Shift shift);
     }
 }

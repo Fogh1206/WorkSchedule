@@ -37,5 +37,10 @@ namespace WorkScheduleAPI.Data
         {
             return await _ctx.Users.ToListAsync();
         }
+        
+        public async Task<User> GetByIdAsync(int id)
+        {
+            return await _ctx.Users.FirstAsync(c => c.Id == id);
+        }
     }
 }

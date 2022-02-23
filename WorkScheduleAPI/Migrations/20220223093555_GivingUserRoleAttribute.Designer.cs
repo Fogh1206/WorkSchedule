@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkScheduleAPI.DataAccess;
 
@@ -10,9 +11,10 @@ using WorkScheduleAPI.DataAccess;
 namespace WorkScheduleAPI.Migrations
 {
     [DbContext(typeof(WorkScheduleContext))]
-    partial class WorkScheduleContextModelSnapshot : ModelSnapshot
+    [Migration("20220223093555_GivingUserRoleAttribute")]
+    partial class GivingUserRoleAttribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.2");
@@ -94,11 +96,9 @@ namespace WorkScheduleAPI.Migrations
 
             modelBuilder.Entity("WorkScheduleAPI.Models.Shift", b =>
                 {
-                    b.HasOne("WorkScheduleAPI.Models.User", "User")
+                    b.HasOne("WorkScheduleAPI.Models.User", null)
                         .WithMany("Shifts")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WorkScheduleAPI.Models.User", b =>

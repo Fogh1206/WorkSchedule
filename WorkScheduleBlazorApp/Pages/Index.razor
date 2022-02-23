@@ -2,56 +2,36 @@
 @using WorkScheduleBlazorApp.Data
 @using WorkScheduleBlazorApp.Models
 @using System.Security.Claims
-@using WorkScheduleBlazorApp.Authentication
+@using WorkScheduleBlazorApp.Components
 @inject IUser _userService;
 @inject ICompany _companyService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-<PageTitle>Index</PageTitle>
+<Title Value="Homepage"></Title>
 
-<h3>ClaimsPrincipal Data</h3>
+<LoginComponent></LoginComponent>
+<AuthorizeView >
+    <div class="row d-flex justify-content-between">
+        <div class="col-sm-5" style="background-color: white">
+            <MyShiftSchedule UserId="@context.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value"/>
+            <br>
+        </div>
+        <div class="col-sm-5" style="background-color: white">
+            <AvailableShifts/>
+            <br>
+        </div>
+    </div>
+    <br/>
+</AuthorizeView>
 
-<p>@_authMessage</p>
-
-@if (_claims.Count() > 0)
-{
-    <ul>
-        @foreach (var claim in _claims)
-        {
-            <li>@claim.Type: @claim.Value</li>
-        }
-    </ul>
-}
-
-<p>@_surnameMessage</p>
 
 @code
 {
-    private string _authMessage;
-    private string _surnameMessage;
-    private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
-    
-    private async Task GetClaimsPrincipalData()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
-        {
-            _authMessage = $"{user.Identity.Name} is authenticated.";
-            _claims = user.Claims;
-            _surnameMessage = 
-                $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
-        }
-        else
-        {
-            _authMessage = "The user is NOT authenticated.";
-        }
-    }
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthStat { get; set; }
     
     protected override async Task OnInitializedAsync()
     {
-        await GetClaimsPrincipalData();
         await base.OnInitializedAsync();
     }
 

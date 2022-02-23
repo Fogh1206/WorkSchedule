@@ -17,7 +17,7 @@ namespace WorkScheduleBlazorApp.Authentication
         private readonly IJSRuntime jsRuntime;
         private readonly IUser userService;
         
-        private User cachedUser;
+        public User cachedUser { get; set; }
 
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IUser userService)
         {

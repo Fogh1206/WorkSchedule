@@ -67,3 +67,9 @@ C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0
 C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
 C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
+C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Microsoft.JSInterop.dll
+C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Web.Extensions.dll
+C:\Users\esben\RiderProjects\WorkSchedule\WorkScheduleBlazorApp\obj\Debug\net6.0\scopedcss\Shared\NotificationComponent.razor.rz.scp.css

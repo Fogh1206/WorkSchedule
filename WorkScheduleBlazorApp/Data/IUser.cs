@@ -8,6 +8,9 @@ namespace WorkScheduleBlazorApp.Data
     {
 
         public Task<User> ValidateUser(User user);
+        public Task DeleteUser(int userId);
+
+        public Task<User> GetFromIdAsync(int id);
 
     }
 }

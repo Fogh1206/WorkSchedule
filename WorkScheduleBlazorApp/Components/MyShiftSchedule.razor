@@ -1,11 +1,80 @@
-﻿@inject AuthenticationStateProvider _authenticationStateProvider
+﻿@using WorkScheduleBlazorApp.Models
+@using WorkScheduleBlazorApp.Data
+@using System.Security.Claims
+@using System.Globalization
+@using Castle.Core.Internal
+@using WorkScheduleBlazorApp.Data.Refresh
+
+@inject AuthenticationStateProvider _authenticationStateProvider
+@inject IRefreshServiceInvShift _refreshServiceInvShift
+@inject IRefreshServiceNavMem _refreshServiceNavMem
+@inject IShift _shiftService
+@inject IUser _userService
 <title>My schedule</title>
 
 <AuthorizeView>
-    <p>These are my shifts</p>
+    
+    <h1>My shifts</h1>
+    
+    @if (_shifts == null)
+    {
+        <p>
+            <em>Loading...</em>
+        </p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Weekday</th>
+                <th>Planned</th>
+                <th>Company</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var shift in _shifts)
+            {
+                <tr>
+                    <td>@shift.Start.Date.ToShortDateString()</td>
+                    <td>@shift.Start.DayOfWeek.ToString()</td>
+                    <td>@(shift.Start.ToShortTimeString()) - @(shift.End.ToShortTimeString())</td>
+                    <td>@user.Company?.Name</td>
+                    <td>@((shift.End.TimeOfDay-shift.Start.TimeOfDay).TotalHours)hrs : 
+                        @((shift.End.TimeOfDay-shift.Start.TimeOfDay).TotalMinutes-(shift.End.TimeOfDay-shift.Start.TimeOfDay).TotalHours*60)mins</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+
 </AuthorizeView>
 
 
 @code {
     
+    [Parameter]
+    public string UserId { get; set; }
+    private User user { get; set; }
+    
+    private IList<GetShiftDTO> _shifts { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _refreshServiceInvShift.RefreshRequested += RefreshState;
+        _shifts = await _shiftService.GetShiftsFromUserId(Convert.ToInt32(UserId));
+        user = await _userService.GetFromIdAsync(Convert.ToInt32(UserId));
+    }
+    
+    public async void RefreshState()
+    {
+        _shifts = await _shiftService.GetShiftsFromUserId(Convert.ToInt32(UserId));
+        user = await _userService.GetFromIdAsync(Convert.ToInt32(UserId));
+        StateHasChanged();
+    }
+    
+
 }

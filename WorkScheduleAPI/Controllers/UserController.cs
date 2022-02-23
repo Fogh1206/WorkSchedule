@@ -53,6 +53,21 @@ namespace WorkScheduleAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/User/{id:int}")]
+        public async Task<ActionResult<User>> GetUserById([FromRoute] int id)
+        {
+            try
+            {
+                User user = await _user.GetByIdAsync(id);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<User>> AddUser([FromBody] CreateUserDTO userDTO)
         {

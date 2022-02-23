@@ -29,8 +29,23 @@ namespace WorkScheduleBlazorApp.Data
                 Encoding.UTF8,
                 "application/json");
             HttpResponseMessage response = await _client.PostAsync($"{Uri}/User/Login", content);
-            User result = await response.Content.ReadFromJsonAsync<User>() ?? throw new Exception("User not found");
+            User result = await response.Content.ReadFromJsonAsync<User>() ?? 
+                          throw new Exception("User not found");
             return result;
+        }
+
+        public async Task<User> GetFromIdAsync(int id)
+        {
+            HttpResponseMessage responseMessage = await _client.GetAsync($"{Uri}/User/{id}");
+            User result = await responseMessage.Content.ReadFromJsonAsync<User>() ??
+                          throw new Exception("User not retrieved");
+            return result;
+        }
+
+        public async Task DeleteUser(int userId)
+        {
+            HttpResponseMessage responseMessage = await _client.DeleteAsync($"{Uri}/User/{userId}");
+            
         }
     }
 }

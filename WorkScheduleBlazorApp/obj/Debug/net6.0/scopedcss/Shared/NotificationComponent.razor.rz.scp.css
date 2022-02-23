@@ -1,0 +1,34 @@
+.notification-body[b-rxh081z86k]{
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    padding:20px;
+    width: 30vw;
+    border-radius: 15px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    color: white;
+}
+
+.notification-visible[b-rxh081z86k]{
+    display: flex;
+}
+
+.notification-hidden[b-rxh081z86k]{
+    display: none;
+}
+
+.notification-title[b-rxh081z86k]{
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.notification-content[b-rxh081z86k]{
+    font-size: 16px;
+}

@@ -1,6 +1,7 @@
 ﻿@page "/ShiftSchedule"
 @using System.Security.Claims
 @using WorkScheduleBlazorApp.Components
+@using System.Globalization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 <h3>Shift Schedule</h3>
 
@@ -12,11 +13,11 @@
     {
         if (Array.IndexOf(types, item) == selected)
         {
-            <button class="btn btn-primary">@item.Name</button>
+            <button class="btn btn-primary">@componentNames[Array.IndexOf(types, item)]</button>
         }
         else
         {
-            <button class="btn btn-secondary" @onclick="() => selected = Array.IndexOf(types,item)">@item.Name</button>
+            <button class="btn btn-secondary" @onclick="() => selected = Array.IndexOf(types,item)">@componentNames[Array.IndexOf(types, item)]</button>
         }
     }
 </div>
@@ -35,12 +36,21 @@
     }
     
     int selected;
+    static int week = new GregorianCalendar().GetWeekOfYear(DateTime.Today, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+    
 
     ComponentBase[] components =
     {
         new MyShiftSchedule(),
         new SurveyPrompt(),
         new FetchData()
+    };
+
+    string[] componentNames =
+    {
+        new string("My shifts"),
+        new string("Today"),
+        new string("Week " + week)
     };
 
     Type[] types => components.Select(c => c.GetType()).ToArray();

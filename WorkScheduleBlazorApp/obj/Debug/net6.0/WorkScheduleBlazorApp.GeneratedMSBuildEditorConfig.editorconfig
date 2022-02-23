@@ -19,12 +19,28 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Components/AvailableShifts.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdmFpbGFibGVTaGlmdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Components/DailyShiftSchedule.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEYWlseVNoaWZ0U2NoZWR1bGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Components/LoginComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2dpbkNvbXBvbmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Components/MyShiftSchedule.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNeVNoaWZ0U2NoZWR1bGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Components/WeeklyShiftSchedule.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xXZWVrbHlTaGlmdFNjaGVkdWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Pages/Account.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Pages/Counter.razor]
@@ -58,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope = b-0wcem6uxs4
 [C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-8s484hj13r
+
+[C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Shared/NotificationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5vdGlmaWNhdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-rxh081z86k
 
 [C:/Users/esben/RiderProjects/WorkSchedule/WorkScheduleBlazorApp/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s

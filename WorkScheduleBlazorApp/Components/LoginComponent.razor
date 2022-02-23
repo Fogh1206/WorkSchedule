@@ -1,62 +1,90 @@
 ﻿@using WorkScheduleBlazorApp.Authentication
 @using WorkScheduleBlazorApp.Models
-@namespace WorkScheduleBlazorApp.Components
 @inject AuthenticationStateProvider _authenticationStateProvider
 @inject NavigationManager _navigationManager
 
 <AuthorizeView>
     <NotAuthorized>
-        
-        <div class="form-group">
-            <label>User name:</label>
-            <input type="text" placeholder="user name" @bind-value="username">
+        <br/>
+        <div class="d-flex justify-content-center">
+            <aside class="col-sm-4 " style="alignment: center">
+                <div class=" card ">
+                    <article class="card-body ">
+                        <header class="card-header">
+                            <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+                        </header>
+                        <br/>
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="form-group">
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text h-100">
+                                            <i class="far fa-user iconClass"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" placeholder="Username" type="text" @bind-value="_username"/>
+                                </div> <!-- input-group.// -->
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text h-100">
+                                            <i class="fas fa-lock iconClass"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" placeholder="******" type="password" @bind-value="_password"/>
+                                </div> <!-- input-group.// -->
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block" @onclick="PerformLogin"> Login </button>
+                            </div> <!-- form-group// -->
+                            <div id="register-link" class="text-right">
+                                <a href="#" @onclick="Register">Register here</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </aside>
         </div>
-        <div class="form-group">
-            <label>User name:</label>
-            <input type="text" placeholder="password" @bind-value="password">
-        </div>
-        <div style="color:red">
-            @errorMessage
-        </div>
-        <button href="" onclick="@PerformLogin">Log in</button>
-
     </NotAuthorized>
-    <Authorized>
-        <button href="" onclick="@PerformLogout">Log out</button>
-    </Authorized>
 </AuthorizeView>
 
 @code {
-    private string username;
-    private string password;
-    private string errorMessage;
+    private string? _username;
+    private string? _password;
+    private string? _errorMessage;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
 
     private async Task PerformLogin()
     {
-        errorMessage = "";
+        _errorMessage = "";
         try
         {
             User user = new()
             {
-                Username = username,
-                Password = password
+                Username = _username,
+                Password = _password
             };
             await ((CustomAuthenticationStateProvider) _authenticationStateProvider).ValidateLogin(user);
-            username = "";
-            password = "";
-            _navigationManager.NavigateTo("/",forceLoad:true);
+            _username = "";
+            _password = "";
+            _navigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {
-            errorMessage = e.Message;
+            _errorMessage = e.Message;
         }
     }
 
     private async Task PerformLogout()
     {
-        errorMessage = "";
-        username = "";
-        password = "";
+        _errorMessage = "";
+        _username = "";
+        _password = "";
         try
         {
             await ((CustomAuthenticationStateProvider) _authenticationStateProvider).Logout();
@@ -64,7 +92,12 @@
         }
         catch (Exception e)
         {
-            errorMessage = e.Message;
+            _errorMessage = e.Message;
         }
+    }
+
+    private void Register()
+    {
+        _navigationManager.NavigateTo("/Register");
     }
 }

@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WorkScheduleBlazorApp.Authentication;
 using WorkScheduleBlazorApp.Data;
+using WorkScheduleBlazorApp.Data.Notifications;
+using WorkScheduleBlazorApp.Data.Refresh;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,11 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IUser, UserService>();
 builder.Services.AddScoped<ICompany, CompanyService>();
+builder.Services.AddScoped<IShift, ShiftService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-
+builder.Services.AddScoped<IRefreshServiceInvShift, RefreshServiceInvShift>();
+builder.Services.AddScoped<IRefreshServiceNavMem, RefreshServiceNavMem>();
+builder.Services.AddSingleton<NotificationManager>();
 
 var app = builder.Build();
 

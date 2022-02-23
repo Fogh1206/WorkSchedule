@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using WorkScheduleBlazorApp.Models;
 
 namespace WorkScheduleBlazorApp.Data
 {
     public interface IShift
     {
-        public IEnumerable<Shift> GetShiftsFromUserId(int userId);
+        public Task<List<GetShiftDTO>> GetShiftsFromUserId(int userId);
     }
 }

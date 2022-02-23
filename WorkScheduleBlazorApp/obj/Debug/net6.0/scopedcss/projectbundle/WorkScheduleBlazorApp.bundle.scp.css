@@ -5,12 +5,13 @@
     flex-direction: column;
 }
 
-main[b-0wcem6uxs4] {
+.main[b-0wcem6uxs4] {
     flex: 1;
+    background-color: whitesmoke;
 }
 
 .sidebar[b-0wcem6uxs4] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-color: steelblue;
 }
 
 .top-row[b-0wcem6uxs4] {
@@ -22,15 +23,15 @@ main[b-0wcem6uxs4] {
     align-items: center;
 }
 
-    .top-row[b-0wcem6uxs4]  a, .top-row .btn-link[b-0wcem6uxs4] {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-    }
+.top-row[b-0wcem6uxs4]  a, .top-row .btn-link[b-0wcem6uxs4] {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
 
-    .top-row a:first-child[b-0wcem6uxs4] {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row a:first-child[b-0wcem6uxs4] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth)[b-0wcem6uxs4] {
@@ -64,71 +65,66 @@ main[b-0wcem6uxs4] {
         z-index: 1;
     }
 
-    .top-row[b-0wcem6uxs4], article[b-0wcem6uxs4] {
+    .main > div[b-0wcem6uxs4] {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
 }
 /* _content/WorkScheduleBlazorApp/Shared/NavMenu.razor.rz.scp.css */
-.navbar-toggler[b-8s484hj13r] {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+/*.navbar-toggler {*/
+/*    background-color: black;*/
+/*}*/
 
-.top-row[b-8s484hj13r] {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
-}
+/*.top-row {*/
+/*    height: 3.5rem;*/
+/*    background-color: rgba(0, 0, 0, 0.4);*/
+/*}*/
 
-.navbar-brand[b-8s484hj13r] {
-    font-size: 1.1rem;
-}
+/*.navbar-brand {*/
+/*    font-size: 1.1rem;*/
+/*}*/
 
-.oi[b-8s484hj13r] {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
-}
+/*.oi {*/
+/*    width: 2rem;*/
+/*    font-size: 1.1rem;*/
+/*    vertical-align: text-top;*/
+/*    top: -2px;*/
+/*}*/
 
-.nav-item[b-8s484hj13r] {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
-}
 
-    .nav-item:first-of-type[b-8s484hj13r] {
-        padding-top: 1rem;
-    }
 
-    .nav-item:last-of-type[b-8s484hj13r] {
-        padding-bottom: 1rem;
-    }
-
-    .nav-item[b-8s484hj13r]  a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
-
-.nav-item[b-8s484hj13r]  a.active {
-    background-color: rgba(255,255,255,0.25);
+/* _content/WorkScheduleBlazorApp/Shared/NotificationComponent.razor.rz.scp.css */
+.notification-body[b-rxh081z86k]{
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    padding:20px;
+    width: 30vw;
+    border-radius: 15px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     color: white;
 }
 
-.nav-item[b-8s484hj13r]  a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
+.notification-visible[b-rxh081z86k]{
+    display: flex;
 }
 
-@media (min-width: 641px) {
-    .navbar-toggler[b-8s484hj13r] {
-        display: none;
-    }
+.notification-hidden[b-rxh081z86k]{
+    display: none;
+}
 
-    .collapse[b-8s484hj13r] {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-    }
+.notification-title[b-rxh081z86k]{
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.notification-content[b-rxh081z86k]{
+    font-size: 16px;
 }
